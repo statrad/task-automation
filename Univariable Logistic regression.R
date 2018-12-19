@@ -1,6 +1,33 @@
-#####################
-#logistic regression#
-####################
+################################
+#Univarable logistic regression#
+################################
+
+# This is the function for doing repeated univariable logistic regression
+# It returns a neat-summarized Odds ratio table similar to reporting format 
+# which is used for reporting summary statstics in conventional papers.
+# It ignores ID variable and response variable so that 
+# able to handle whole dataset at once.
+
+# To get proper result from it, there are few things that 
+# you should follow and it is written below.
+
+# 1. The format for input data must be a data frame
+#    - It should be done by simple command, "as.data.frame"
+
+# 2. The type of variable must be clarified.
+#    - If you want to treat the variable as "categorical" variable
+#      you should transform it as factor and it accomplished by R command, "as.factor(x)".
+#    - In case of Continous, use "as.numeric(x)" for trasnformation.
+
+# 3. It returns file via "csv" format so that the working directory must be designated
+#    or state Full path of it's result to "filename" parameter.
+
+# 4. Parameter description : 
+#    -dat : data (data.frame format) which contains independent variables
+#    -pnum : patient(subject) number
+#    -y : response variable 
+#    -filename : "filename", in case of specfied working directory  or full path for the file.
+
 unilog<-function(dat,pnum,y,filename="result"){
   library(doBy)
   library(logistf)
