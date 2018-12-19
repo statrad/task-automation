@@ -1,5 +1,23 @@
-#table 1
-#########
+###################################################
+#Making table 1(paper like descriptive table form)#
+###################################################
+
+# This is the function for making Table1 
+# It returns a neat-summarized table resemble reporting format 
+# which is used for reporting summary statstics in conventional papers.
+
+# To get proper result from it, there are few things that 
+# you should follow and it is written below.
+
+# 1. The format for input data must be a data frame
+#    - It should be done by simple command, "as.data.frame"
+
+# 2. The type of variable must be clarified.
+#    - If you want to treat the variable as "categorical" variable
+#      you should transform it as factor and it accomplished by R command, "as.factor(x)".
+#    - In case of Continous, use "as.numeric(x)" for trasnformation.
+
+# 3. It returns file via "csv" format so that the working directory must be designated.
 
 tb1<- function (dat,pnum,group,filename="table1"){
   group<-as.factor(group)
