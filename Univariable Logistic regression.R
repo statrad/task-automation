@@ -22,7 +22,9 @@
 # 3. It returns file via "csv" format so that the working directory must be designated
 #    or state Full path of it's result to "filename" parameter.
 
-# 4. Parameter description : 
+# 4. "doBy" , "logistf" must be installed in advance.
+
+# 5. Parameter description : 
 #    -dat : data (data.frame format) which contains independent variables
 #    -pnum : patient(subject) number
 #    -y : response variable 
