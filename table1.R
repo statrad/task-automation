@@ -5,6 +5,8 @@
 # This is the function for making Table1 
 # It returns a neat-summarized table resemble reporting format 
 # which is used for reporting summary statstics in conventional papers.
+# It ignores ID variable and group variable so that 
+# able to handle whole dataset at once.
 
 # To get proper result from it, there are few things that 
 # you should follow and it is written below.
