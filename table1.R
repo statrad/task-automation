@@ -17,7 +17,14 @@
 #      you should transform it as factor and it accomplished by R command, "as.factor(x)".
 #    - In case of Continous, use "as.numeric(x)" for trasnformation.
 
-# 3. It returns file via "csv" format so that the working directory must be designated.
+# 3. It returns file via "csv" format so that the working directory must be designated
+#    or state Full path of it's result to "filename" parameter.
+
+# 4. Parameter description : 
+#    -dat : data (data.frame format)
+#    -pnum : patient(subject) number
+#    -group : group variable 
+#    -filename : "filename", in case of specfied working directory  or full path for the file.
 
 tb1<- function (dat,pnum,group,filename="table1"){
   group<-as.factor(group)
