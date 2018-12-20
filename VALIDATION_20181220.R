@@ -19,8 +19,8 @@ library(cvAUC)
 #time1.colname, time2.colname= start time, end time column name 
 #time2 = follow-up time(=end time) column name
 #===========================================================================================================================================    
-#===========================================================================================================================================    
-
+#===========================================================================================================================================   
+#duration으로 변경 
 internal.validation=function( out.type=c("binary","survival"),data,y.colname=NULL,time1.colname=NULL,time2.colname=NULL,event.colname=NULL,
                               val.type=c("bootstrap","cross"),B=1000,k=10,set.seed=NA){
  
@@ -404,4 +404,4 @@ internal.validation=function( out.type=c("binary","survival"),data,y.colname=NUL
 
   return(result)
 }
-
+#excel file 추가 
