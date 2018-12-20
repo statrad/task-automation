@@ -24,7 +24,7 @@
 
 # 5. Parameter description : 
 #    -dat : data (data.frame format)
-#    -pnum : patient(subject) number
+#    -pnum : patient(subject) number => need to be revised
 #    -group : group variable 
 #    -filename : "filename", in case of specfied working directory  or full path for the file.
 
