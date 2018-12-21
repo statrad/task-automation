@@ -34,6 +34,7 @@
 tb1<- function (dat,var.list,group,filename="table1"){
   rownum<-0
   index<-c()
+  g.name<-group
   g.index<-grep(group,colnames(dat))
   group<-as.factor(dat[,g.index])
   glev<-levels(group)
@@ -48,6 +49,7 @@ tb1<- function (dat,var.list,group,filename="table1"){
   }
   
   for(i in index){
+    if(colnames(dat)[i]==g.name){next}
     if(is.factor(dat[,i])){
       rownum<-rownum+length(levels(dat[,i]))
     }else{
@@ -59,6 +61,7 @@ tb1<- function (dat,var.list,group,filename="table1"){
   j<-1 #row indicator.
   
   for(i in index){
+    if(colnames(dat)[i]==g.name){next}
     
     lev<-levels(dat[,i])
     
