@@ -24,16 +24,30 @@
 
 # 5. Parameter description : 
 #    -dat : data (data.frame format)
-#    -pnum : patient(subject) number => need to be revised
+#    -var.list : There are three opions are available.
+#                1) var.list = "var1" : summary up var1 to end column of dataset
+#                2) var.list = c("var1","var2) : summary up var1 to var2
+#                3) var.list = c("var1","var2","var3"...) - more than 2var : summary up only desginated var.
 #    -group : group variable 
 #    -filename : "filename", in case of specfied working directory  or full path for the file.
 
-tb1<- function (dat,pnum,group,filename="table1"){
-  group<-as.factor(group)
-  glev<-levels(group)
+tb1<- function (dat,var.list,group,filename="table1"){
   rownum<-0
-  for(i in 1 : ncol(dat)){
-    if(identical(dat[,i],group)|identical(dat[,i],pnum)){next}
+  index<-c()
+  g.index<-grep(group,colnames(dat))
+  group<-as.factor(dat[,g.index])
+  glev<-levels(group)
+  if(length(var.list)==1){
+    index <- seq(grep(var.list,colnames(dat)),ncol(dat))
+  }else if(length(var.list)==2){
+    index<- seq(grep(var.list[1],colnames(dat)),grep(var.list[2],colnames(dat)))
+  }else{
+    for(i in 1:length(var.list)){
+      index<-c(index,grep(var.list[i],colnames(dat)))
+    }
+  }
+  
+  for(i in index){
     if(is.factor(dat[,i])){
       rownum<-rownum+length(levels(dat[,i]))
     }else{
@@ -44,10 +58,7 @@ tb1<- function (dat,pnum,group,filename="table1"){
   colnames(table)<-c("variable",levels(as.factor(group)),"p-value")
   j<-1 #row indicator.
   
-  for(i in 1 : ncol(dat)){
-    if(identical(dat[,i],group)|identical(dat[,i],pnum)){
-      next
-    }
+  for(i in index){
     
     lev<-levels(dat[,i])
     
@@ -55,7 +66,7 @@ tb1<- function (dat,pnum,group,filename="table1"){
       for(l in j : (j+length(lev)-1)){
         table[l,1]<-paste(colnames(dat)[i]," ",lev[l-j+1])
       }
-      contingency<-table(dat[,i],group)
+      contingency<-table(dat[,i],dat[,g.index])
       if(sum(suppressWarnings(chisq.test(contingency)$expected<5))>=1){ #expected value <5 , exact test.
         table[j,"p-value"]<-round(fisher.test(contingency)$p.value,3)
       }else{ #expected value >5, chisq test.
@@ -65,8 +76,8 @@ tb1<- function (dat,pnum,group,filename="table1"){
       prop<-round(prop.table(contingency,margin=2)*100,1)
       
       for(k in j:(j+length(lev)-1)){
-         table[k,2]<-paste(contingency[(k-j+1),1]," (",prop[(k-j+1),1],"%)")
-         table[k,3]<-paste(contingency[(k-j+1),2]," (",prop[(k-j+1),2],"%)")
+        table[k,2]<-paste(contingency[(k-j+1),1]," (",prop[(k-j+1),1],"%)")
+        table[k,3]<-paste(contingency[(k-j+1),2]," (",prop[(k-j+1),2],"%)")
       }          
       
       j<-j+length(lev)
@@ -96,5 +107,3 @@ tb1<- function (dat,pnum,group,filename="table1"){
   write.csv(table,paste(filename,".csv",sep=""),row.names = F)
   return(table)
 }
-
-
