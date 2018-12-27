@@ -27,9 +27,11 @@
 #    -var.list : There are three opions are available.
 #                1) var.list = "var1" : summary up var1 to end column of dataset
 #                2) var.list = c("var1","var2) : summary up var1 to var2
-#                3) var.list = c("var1","var2","var3"...) - more than 2var : summary up only desginated var.
+#                3) var.list = c("var1","var2","var3"...) - more than 2var : summary up to only desginated var.
 #    -group : group variable 
 #    -filename : "filename", in case of specfied working directory  or full path for the file.
+
+#########################NOTE##########################
 
 # There are two errors you may got while you use.
 # 1.  Error: Can't use matrix or array for column indexing  
@@ -38,6 +40,8 @@
 #     - This is more typical error. It returns this message when you give it wrong parameter(variable name).
 #     - Please confirm your column names by command "colnames(data)" and input right column name.
 
+# It corresponds ONLY "2 Groups".
+######################################################
 
 ### Example codes will be offered.###
 
