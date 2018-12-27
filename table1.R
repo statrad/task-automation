@@ -31,6 +31,16 @@
 #    -group : group variable 
 #    -filename : "filename", in case of specfied working directory  or full path for the file.
 
+# There are two errors you may got while you use.
+# 1.  Error: Can't use matrix or array for column indexing  
+#     - It may occurs if you put the data as a "tibble" type or something. Please convert it as a data.frame.
+# 2.  Error in summary(a)[, 4] : incorrect number of dimensions
+#     - This is more typical error. It returns this message when you give it wrong parameter(variable name).
+#     - Please confirm your column names by command "colnames(data)" and input right column name.
+
+
+### Example codes will be offered.###
+
 tb1<- function (dat,var.list,group,filename="table1"){
   rownum<-0
   index<-c()
