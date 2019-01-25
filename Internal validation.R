@@ -36,8 +36,8 @@
 #    -B : bootstrap number(only available for val.type "bootstrap"). default 1000
 #    -k : cross validation number(only available for val.type "cross"). default 10
 
-#===========================================================================================================================================    
-#===========================================================================================================================================    
+#====================================================================================================================================
+#====================================================================================================================================
 
 internal.validation=function( out.type=c("binary","survival"),val.type=c("bootstrap","cross"),
                               data,
@@ -62,9 +62,9 @@ internal.validation=function( out.type=c("binary","survival"),val.type=c("bootst
    library(coxphf)
    library(stringr)
 
- #===========================================================================================================================================    
- #Data handling============================================================================================================================== 
- #data reordering (dependent variable, independent variables)================================================================================    
+ #====================================================================================================================================
+ #Data handling=======================================================================================================================
+ #data reordering (dependent variable, independent variables)=========================================================================    
 
     
   if(regexpr(":",var.list)[1] != -1){
@@ -111,8 +111,8 @@ internal.validation=function( out.type=c("binary","survival"),val.type=c("bootst
   #Firth peneralized regression option 
   firth.op=ifelse(sum(com.sep)>0,TRUE,FALSE)
   
-#===========================================================================================================================================    
-  #Start bootstrap validation=============================================================================================================== 
+#=====================================================================================================================================   
+  #Start bootstrap validation=========================================================================================================
 
   set.seed = ifelse(is.na(set.seed),format(Sys.Date(),"%Y%m%d"),set.seed)
   
@@ -123,7 +123,7 @@ internal.validation=function( out.type=c("binary","survival"),val.type=c("bootst
     diff.cindex=rep(0,B)
     pb = txtProgressBar(min=0,max=B-1,style=3)
 
-#outcome type: binary (logistic regression)===================================================================================================   
+#outcome type: binary (logistic regression)===========================================================================================
   if(out.type=="binary"){  
     i=1
     while(i < B){
@@ -183,7 +183,7 @@ internal.validation=function( out.type=c("binary","survival"),val.type=c("bootst
     b.validated.est_25=original.cindex$auc-quan_975 
     
     
-#outcome type: survival (Cox proportional hazard regression)=================================================================================   
+#outcome type: survival (Cox proportional hazard regression)========================================================================== 
   }else if(out.type=="survival"){
     i=1
     while(i < B){
@@ -251,8 +251,8 @@ internal.validation=function( out.type=c("binary","survival"),val.type=c("bootst
     AUC.result=data.frame(conf=c(originalAUC,result),p_value=NA)
     rownames(AUC.result)=c("Original AUC","Bootstrap validation AUC")
     
-#===========================================================================================================================================    
-#Start cross validation===================================================================================================================== 
+#=====================================================================================================================================   
+#Start cross validation===============================================================================================================
 
       } else if(val.type=="cross"){
   
@@ -261,7 +261,7 @@ internal.validation=function( out.type=c("binary","survival"),val.type=c("bootst
   list = 1:k
   pred.list=list();y.list=list()
 
-#outcome type: binary (logistic regression)==================================================================================================   
+#outcome type: binary (logistic regression)============================================================================================ 
     
     #fit trained model using k fold sample  
     if(out.type=="binary"){
@@ -314,7 +314,7 @@ internal.validation=function( out.type=c("binary","survival"),val.type=c("bootst
       
       }
 
-#outcome type: survival (Cox proportional hazard regression)=================================================================================   
+#outcome type: survival (Cox proportional hazard regression)===========================================================================  
       
     }else if(out.type=="survival"){
       
@@ -364,8 +364,8 @@ internal.validation=function( out.type=c("binary","survival"),val.type=c("bootst
   
   }
   
-#===========================================================================================================================================    
-#multivariate regression =================================================================================================================== 
+#======================================================================================================================================  
+#multivariate regression ==============================================================================================================
 
   if(out.type=="binary"){
     
@@ -414,7 +414,7 @@ internal.validation=function( out.type=c("binary","survival"),val.type=c("bootst
 }
 
 
-######## Example Code ################################################################################################################################
+######## Example Code ##################################################################################################################
 
 ##== out.type is "binary" ==##
 
@@ -442,4 +442,4 @@ internal.validation=function( out.type=c("binary","survival"),val.type=c("bootst
 #                      data=kidney,var.list = c("age : frail"),event.colname="status",time.colname="time",
 #                      filename = "survial analysis") # do the bootstrap internal validation 
 
-######################################################################################################################################################
+########################################################################################################################################
