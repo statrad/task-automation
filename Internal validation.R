@@ -26,11 +26,11 @@
 #    -var.list : There are two opions are available.
 #                1) var.list = c("var1 : var2") : summary up var1 to var2
 #                2) var.list = c("var1","var2","var3"...) - more than 2var : summary up to only desginated var.
-#    -event.colname : "event" variable name (dependent variable)
+#    -event.colname : "event" variable name (independent variable)
 #    -time.colname : "follow-up time" variable name (only available for survival analysis)
 #    -save.dir : specify working directory. 
 #                If you don't, it will be automatically assigned to your current path, "setwd()". 
-#    -filename : "filename", in case of specfied working directory  or full path for the file.
+#    -filename : "filename"
 #    -set.seed : specify seed number. 
 #                If you don't, it will be automatically assigned to your current date
 #    -B : bootstrap number(only available for val.type "bootstrap"). default 1000
