@@ -245,8 +245,11 @@ featureSel <- function(data, out.type, out1, out2=NA, clinical=NA, feature1, fea
 ##############################################################################
 setwd("C:/Users/gradbios/Google 드라이브/Automation/")
 
+setwd("C:/Users/gradbios/Google 드라이브/Automation/")
+
 ## survival outcome
-data("follic")
+dat <- read.csv("Example_survival.csv")
+dat <- dat[complete.cases(dat),]
 featureSel(dat, out.type="survival", "OS2", "Death", feature1="major_axis", feature2="Calvarial_remodeling", method="Random forest", seed=20181120, B=100) 
 # -> Result using defined method only
 
@@ -257,6 +260,7 @@ data("breast")
 table(breast$status)
 breast <- breast[complete.cases(breast),]
 sum(is.na(breast))
-featureSel(breast, out.type="binary", "status", clinical=c("tsize","pnodes"), feature1="mean_radius", feature2="worst_fractaldim", seed=20181120, B=100) 
+featureSel(breast, out.type="binary", "status", clinical="tsize", feature1="mean_radius", feature2="worst_fractaldim", seed=20181120, B=100) 
 # -> Time difference of XXXX secs
+
 
