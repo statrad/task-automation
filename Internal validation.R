@@ -409,7 +409,7 @@ internal.validation=function( out.type=c("binary","survival"),val.type=c("bootst
     p.value[p.value<0.001]=">.999"
   }
     
-  regression.result=data.frame(conf=conf,p_value=round(p.value,3))
+  regression.result=data.frame(conf=conf,p_value=p.value)
   result=rbind(regression.result,AUC.result)
   
   dir = ifelse(is.na(save.dir),getwd(),save.dir)
