@@ -370,9 +370,9 @@ internal.validation=function( out.type=c("binary","survival"),val.type=c("bootst
   if(out.type=="binary"){
     
     if(firth.op){
-      cat("Logistic regression with Firth’s penalized maximum likelihood estimation\n")
+      cat("<< Logistic regression with Firth’s penalized maximum likelihood estimation >>\n")
     }else{
-      cat("Logistic regression\n")
+      cat("<< Logistic regression >>\n")
     }
     ret=summary(fit)
     p.value=ret$coefficients[,4]
@@ -389,7 +389,7 @@ internal.validation=function( out.type=c("binary","survival"),val.type=c("bootst
       odds=exp(coef(fit))
       conf=as.data.frame(exp(confint(fit)))
       conf=paste(round(odds,3)," (",round(conf$`2.5 %`,3),", ",round(conf$`97.5 %`,3),")",sep = "")
-      cat("Cox proportional hazard regression with Firth’s penalized maximum likelihood estimation\n")
+      cat("<< Cox proportional hazard regression with Firth’s penalized maximum likelihood estimation >>\n")
     }
     else{
       ret=summary(fit)
@@ -397,7 +397,7 @@ internal.validation=function( out.type=c("binary","survival"),val.type=c("bootst
       odds=as.vector(exp(coef(fit)))
       conf=as.data.frame(exp(confint(fit)))
       conf=paste(round(odds,3)," (",round(conf$`2.5 %`,3),", ",round(conf$`97.5 %`,3),")",sep = "")
-      cat("Cox proportional hazard regression\n")
+      cat("<< Cox proportional hazard regression >>\n")
     }
    
   }
