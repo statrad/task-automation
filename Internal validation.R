@@ -3,7 +3,7 @@
 ###############################
 
 # This is the function for doing internal validation
-# It returns a bootstrap-validated estimate of the AUC, original AUC and multivariable regression table 
+# It returns a validated estimate of the AUC, original AUC and multivariable regression table 
 # which is used for reporting summary statstics in conventional papers.
 
 # To get proper result from it, there are few things that 
@@ -376,10 +376,10 @@ internal.validation=function( out.type=c("binary","survival"),val.type=c("bootst
     }
     ret=summary(fit)
     p.value=ret$coefficients[,4]
+    p.value=p.value[-1]
     odds=as.vector(exp(coef(fit)))
     conf=as.data.frame(exp(confint(fit)))
     conf=paste(round(odds[-1],3)," (",round(conf$`2.5 %`[-1],3),", ",round(conf$`97.5 %`[-1],3),")",sep = "")
-    regression.result=data.frame(conf=conf,p_value=round(p.value[-1],3))
     
   }else if(out.type=="survival"){
     
@@ -399,9 +399,17 @@ internal.validation=function( out.type=c("binary","survival"),val.type=c("bootst
       conf=paste(round(odds,3)," (",round(conf$`2.5 %`,3),", ",round(conf$`97.5 %`,3),")",sep = "")
       cat("Cox proportional hazard regression\n")
     }
-    regression.result=data.frame(conf=conf,p_value=round(p.value,3))
+   
   }
-  
+    
+  p.value=round(p.value,3)
+  if(sum(p.value==0)!=0){
+    p.value[p.value<0.001]="<0.001"
+  }else if(sum(p.value==1)!=0){
+    p.value[p.value<0.001]=">.999"
+  }
+    
+  regression.result=data.frame(conf=conf,p_value=round(p.value,3))
   result=rbind(regression.result,AUC.result)
   
   dir = ifelse(is.na(save.dir),getwd(),save.dir)
@@ -428,7 +436,7 @@ internal.validation=function( out.type=c("binary","survival"),val.type=c("bootst
 
 # internal.validation(out.type="binary",val.type="cross",
 #                      data=infert,var.list = c("age","parity","induced","spontaneous"),event.colname="case",
-#                      filename = "logistic analysis") # do the bootstrap internal validation 
+#                      save.dir="C:/", filename = "logistic analysis") # do the bootstrap internal validation 
 
 
 ##== out.type is "survival" ==##
@@ -440,6 +448,6 @@ internal.validation=function( out.type=c("binary","survival"),val.type=c("bootst
 
 # internal.validation(out.type="survival",val.type="bootstrap",
 #                      data=kidney,var.list = c("age : frail"),event.colname="status",time.colname="time",
-#                      filename = "survial analysis") # do the bootstrap internal validation 
+#                      save.dir="C:/", filename = "survial analysis") # do the bootstrap internal validation 
 
 ########################################################################################################################################
