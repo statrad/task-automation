@@ -1,6 +1,6 @@
 ###############################
 ##### internal validation ##### 
-###############################
+############################### test end
 
 # This is the function for doing internal validation
 # It returns a validated estimate of the AUC, original AUC and multivariable regression table 
