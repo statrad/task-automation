@@ -1,5 +1,5 @@
 ###############################
-##### internal validation ##### test for automation2
+##### internal validation ##### 
 ############################### 
 
 # This is the function for doing internal validation
